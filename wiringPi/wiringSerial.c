@@ -38,10 +38,11 @@
  * serialOpen:
  *	Open and initialise the serial port, setting all the right
  *	port parameters - or as many as are required - hopefully!
+ *	-> O_BLOCK, even parity, 8-bits data
  *********************************************************************************
  */
 
-int serialOpen (const char *device, const int baud)
+int serialOpen (const char *device, const int baud, const int readTimeoutInDecisec)
 {
   struct termios options ;
   speed_t myBaud ;
@@ -84,37 +85,35 @@ int serialOpen (const char *device, const int baud)
       return -2 ;
   }
 
-  if ((fd = open (device, O_RDWR | O_NOCTTY | O_NDELAY | O_NONBLOCK)) == -1)
+  if ((fd = open (device, O_RDWR | O_NOCTTY | O_NDELAY /*| O_NONBLOCK*/)) == -1)
     return -1 ;
 
   fcntl (fd, F_SETFL, O_RDWR) ;
 
-// Get and modify current options:
-
+  // Get and modify current options: man 3 termios
   tcgetattr (fd, &options) ;
-
-    cfmakeraw   (&options) ;
-    cfsetispeed (&options, myBaud) ;
-    cfsetospeed (&options, myBaud) ;
-
-    options.c_cflag |= (CLOCAL | CREAD) ;
-    options.c_cflag &= ~PARENB ;
-    options.c_cflag &= ~CSTOPB ;
-    options.c_cflag &= ~CSIZE ;
-    options.c_cflag |= CS8 ;
-    options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG) ;
-    options.c_oflag &= ~OPOST ;
-
-    options.c_cc [VMIN]  =   0 ;
-    options.c_cc [VTIME] = 100 ;	// Ten seconds (100 deciseconds)
-
+  cfmakeraw   (&options) ;
+  cfsetispeed (&options, myBaud) ;
+  cfsetospeed (&options, myBaud) ;
+//  options.c_iflag |= (IGNBRK | IGNCR);		//Ignore BREAK & CR on input - suppressed since binary com, no more ascii
+  options.c_cflag |= (CLOCAL | CREAD) ;			//CLOCAL: Ignore modem control lines - CREAD: Enable receiver.
+//  options.c_cflag &= ~PARENB ;				// Disable Parity
+  options.c_cflag |= PARENB ;					// Enable Parity - even by default
+  options.c_cflag &= ~CSTOPB ;					// Disable 2nd Stop bit
+  options.c_cflag &= ~CSIZE ;
+  options.c_cflag |= CS8 ;						// 8-bits data
+  options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG) ;	//ECHO: Echo input characters - ICANON: Enable canonical mode
+			//ICANON|ECHOE: the ERASE character erases the preceding input character, and WERASE erases the preceding word
+			//ISIG :  When any of the characters INTR, QUIT, SUSP, or DSUSP are received, generate the corresponding signal.
+  options.c_oflag &= ~OPOST ;					//OPOST: Enable implementation-defined output processing.
+  /* read will return either when at least one byte of data is available, or after VTIME below */
+  options.c_cc[VMIN]  =  0 ;					//Minimum number of characters for noncanonical read.
+  options.c_cc[VTIME] = readTimeoutInDecisec ;	//Timeout in deciseconds for noncanonical read: Ex 10 (deciseconds) for 1 second
   tcsetattr (fd, TCSANOW, &options) ;
 
   ioctl (fd, TIOCMGET, &status);
-
   status |= TIOCM_DTR ;
   status |= TIOCM_RTS ;
-
   ioctl (fd, TIOCMSET, &status);
 
   usleep (10000) ;	// 10mS
@@ -182,7 +181,7 @@ void serialPrintf (const int fd, const char *message, ...)
   char buffer [1024] ;
 
   va_start (argp, message) ;
-    vsnprintf (buffer, 1023, message, argp) ;
+  vsnprintf (buffer, 1023, message, argp) ;
   va_end (argp) ;
 
   serialPuts (fd, buffer) ;
@@ -210,7 +209,7 @@ int serialDataAvail (const int fd)
  * serialGetchar:
  *	Get a single character from the serial device.
  *	Note: Zero is a valid character and this function will time-out after
- *	10 seconds.
+ *	time-out defined in serialOpen().
  *********************************************************************************
  */
 
@@ -223,3 +222,37 @@ int serialGetchar (const int fd)
 
   return ((int)x) & 0xFF ;
 }
+
+
+#ifdef _EPserialOnTarget_	//Used in EPserialForTestOnly/Makefile
+/*
+ * serialGets:
+ *	Get a string from the serial device.
+ *	Note: Zero is a valid character and this function will time-out after
+ *	time-out defined in serialOpen().
+ *********************************************************************************
+ */
+int serialGets (const int fd, char * const s)
+{
+  int     totalNb = 0, readNb;
+  char *  buf = s;
+
+  while ((readNb = serialDataAvail(fd)) > 0) {
+    if (read(fd, buf, readNb) != readNb)
+      return -1;
+    /*
+    *(buf + readNb) = '\0';
+    printf("Read %d : %s\r\n", readNb, buf);
+    */
+    totalNb += readNb;
+    buf += readNb;
+  }
+  if (readNb < 0)
+    return -1;
+  else {
+    *(s + totalNb) = '\0';
+    /*printf("Total read %d : %s\r\n", totalNb, s);*/
+    return totalNb;
+  }
+}
+#endif

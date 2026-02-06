@@ -24,7 +24,7 @@
 extern "C" {
 #endif
 
-extern int   serialOpen      (const char *device, const int baud) ;
+extern int   serialOpen      (const char *device, const int baud, const int readTimeoutInDecisec) ;
 extern void  serialClose     (const int fd) ;
 extern void  serialFlush     (const int fd) ;
 extern void  serialPutchar   (const int fd, const unsigned char c) ;
@@ -32,6 +32,9 @@ extern void  serialPuts      (const int fd, const char *s) ;
 extern void  serialPrintf    (const int fd, const char *message, ...) ;
 extern int   serialDataAvail (const int fd) ;
 extern int   serialGetchar   (const int fd) ;
+#ifdef _EPserialOnTarget_	//Used in EPserialForTestOnly/Makefile
+extern int   serialGets      (const int fd, char * const s) ;
+#endif
 
 #ifdef __cplusplus
 }

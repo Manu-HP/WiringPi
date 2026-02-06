@@ -558,8 +558,8 @@ static uint8_t gpioToPUDCLK [] =
 static uint8_t gpioToPwmALT [] =
 {
           0,         0,         0,         0,         0,         0,         0,         0,	//  0 ->  7
-          0,         0,         0,         0, FSEL_ALT0, FSEL_ALT0,         0,         0, 	//  8 -> 15
-          0,         0, FSEL_ALT5, FSEL_ALT5,         0,         0,         0,         0, 	// 16 -> 23
+          0,         0,         0,         0, FSEL_ALT0, FSEL_ALT0,         0,         0,	//  8 -> 15
+          0,         0, FSEL_ALT5, FSEL_ALT5,         0,         0,         0,         0,	// 16 -> 23
           0,         0,         0,         0,         0,         0,         0,         0,	// 24 -> 31
           0,         0,         0,         0,         0,         0,         0,         0,	// 32 -> 39
   FSEL_ALT0, FSEL_ALT0,         0,         0,         0, FSEL_ALT0,         0,         0,	// 40 -> 47
@@ -574,8 +574,8 @@ static uint8_t gpioToPwmALT [] =
 static uint8_t gpioToPwmPort [] =
 {
           0,         0,         0,         0,         0,         0,         0,         0,	//  0 ->  7
-          0,         0,         0,         0, PWM0_DATA, PWM1_DATA,         0,         0, 	//  8 -> 15
-          0,         0, PWM0_DATA, PWM1_DATA,         0,         0,         0,         0, 	// 16 -> 23
+          0,         0,         0,         0, PWM0_DATA, PWM1_DATA,         0,         0,	//  8 -> 15
+          0,         0, PWM0_DATA, PWM1_DATA,         0,         0,         0,         0,	// 16 -> 23
           0,         0,         0,         0,         0,         0,         0,         0,	// 24 -> 31
           0,         0,         0,         0,         0,         0,         0,         0,	// 32 -> 39
   PWM0_DATA, PWM1_DATA,         0,         0,         0, PWM1_DATA,         0,         0,	// 40 -> 47
@@ -597,8 +597,8 @@ static uint8_t gpioToPwmPort [] =
 static uint8_t gpioToGpClkALT0 [] =
 {
           0,         0,         0,         0, FSEL_ALT0, FSEL_ALT0, FSEL_ALT0,         0,	//  0 ->  7
-          0,         0,         0,         0,         0,         0,         0,         0, 	//  8 -> 15
-          0,         0,         0,         0, FSEL_ALT5, FSEL_ALT5,         0,         0, 	// 16 -> 23
+          0,         0,         0,         0,         0,         0,         0,         0,	//  8 -> 15
+          0,         0,         0,         0, FSEL_ALT5, FSEL_ALT5,         0,         0,	// 16 -> 23
           0,         0,         0,         0,         0,         0,         0,         0,	// 24 -> 31
   FSEL_ALT0,         0, FSEL_ALT0,         0,         0,         0,         0,         0,	// 32 -> 39
           0,         0, FSEL_ALT0, FSEL_ALT0, FSEL_ALT0,         0,         0,         0,	// 40 -> 47
@@ -611,26 +611,26 @@ static uint8_t gpioToGpClkALT0 [] =
 
 static uint8_t gpioToClkCon [] =
 {
-         -1,        -1,        -1,        -1,        28,        30,        32,        -1,	//  0 ->  7
-         -1,        -1,        -1,        -1,        -1,        -1,        -1,        -1, 	//  8 -> 15
-         -1,        -1,        -1,        -1,        28,        30,        -1,        -1, 	// 16 -> 23
-         -1,        -1,        -1,        -1,        -1,        -1,        -1,        -1,	// 24 -> 31
-         28,        -1,        28,        -1,        -1,        -1,        -1,        -1,	// 32 -> 39
-         -1,        -1,        28,        30,        28,        -1,        -1,        -1,	// 40 -> 47
-         -1,        -1,        -1,        -1,        -1,        -1,        -1,        -1,	// 48 -> 55
-         -1,        -1,        -1,        -1,        -1,        -1,        -1,        -1,	// 56 -> 63
+       0xff,      0xff,      0xff,      0xff,        28,        30,        32,      0xff,	//  0 ->  7
+       0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,	//  8 -> 15
+       0xff,      0xff,      0xff,      0xff,        28,        30,      0xff,      0xff,	// 16 -> 23
+       0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,	// 24 -> 31
+         28,      0xff,        28,      0xff,      0xff,      0xff,      0xff,      0xff,	// 32 -> 39
+       0xff,      0xff,        28,        30,        28,      0xff,      0xff,      0xff,	// 40 -> 47
+       0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,	// 48 -> 55
+       0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,	// 56 -> 63
 } ;
 
 static uint8_t gpioToClkDiv [] =
 {
-         -1,        -1,        -1,        -1,        29,        31,        33,        -1,	//  0 ->  7
-         -1,        -1,        -1,        -1,        -1,        -1,        -1,        -1, 	//  8 -> 15
-         -1,        -1,        -1,        -1,        29,        31,        -1,        -1, 	// 16 -> 23
-         -1,        -1,        -1,        -1,        -1,        -1,        -1,        -1,	// 24 -> 31
-         29,        -1,        29,        -1,        -1,        -1,        -1,        -1,	// 32 -> 39
-         -1,        -1,        29,        31,        29,        -1,        -1,        -1,	// 40 -> 47
-         -1,        -1,        -1,        -1,        -1,        -1,        -1,        -1,	// 48 -> 55
-         -1,        -1,        -1,        -1,        -1,        -1,        -1,        -1,	// 56 -> 63
+       0xff,      0xff,      0xff,      0xff,        29,        31,        33,      0xff,	//  0 ->  7
+       0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,	//  8 -> 15
+       0xff,      0xff,      0xff,      0xff,        29,        31,      0xff,      0xff,	// 16 -> 23
+       0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,	// 24 -> 31
+         29,      0xff,        29,      0xff,      0xff,      0xff,      0xff,      0xff,	// 32 -> 39
+       0xff,      0xff,        29,        31,        29,      0xff,      0xff,      0xff,	// 40 -> 47
+       0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,	// 48 -> 55
+       0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,      0xff,	// 56 -> 63
 } ;
 
 
@@ -1309,8 +1309,8 @@ struct wiringPiNodeStruct *wiringPiFindNode (int pin)
 
 static         void pinModeDummy             (UNU struct wiringPiNodeStruct *node, UNU int pin, UNU int mode)  { return ; }
 static         void pullUpDnControlDummy     (UNU struct wiringPiNodeStruct *node, UNU int pin, UNU int pud)   { return ; }
-static unsigned int digitalRead8Dummy        (UNU struct wiringPiNodeStruct *node, UNU int UNU pin)            { return 0 ; }
-static         void digitalWrite8Dummy       (UNU struct wiringPiNodeStruct *node, UNU int pin, UNU int value) { return ; }
+//static unsigned int digitalRead8Dummy        (UNU struct wiringPiNodeStruct *node, UNU int UNU pin)            { return 0 ; }
+//static         void digitalWrite8Dummy       (UNU struct wiringPiNodeStruct *node, UNU int pin, UNU int value) { return ; }
 static          int digitalReadDummy         (UNU struct wiringPiNodeStruct *node, UNU int UNU pin)            { return LOW ; }
 static         void digitalWriteDummy        (UNU struct wiringPiNodeStruct *node, UNU int pin, UNU int value) { return ; }
 static         void pwmWriteDummy            (UNU struct wiringPiNodeStruct *node, UNU int pin, UNU int value) { return ; }
@@ -1451,7 +1451,7 @@ void pinMode (int pin, int mode)
     else if (mode == PWM_OUTPUT)
     {
       if ((alt = gpioToPwmALT [pin]) == 0)	// Not a hardware capable PWM pin
-	return ;
+        return ;
 
       usingGpioMemCheck ("pinMode PWM") ;
 
@@ -1467,7 +1467,7 @@ void pinMode (int pin, int mode)
     else if (mode == GPIO_CLOCK)
     {
       if ((alt = gpioToGpClkALT0 [pin]) == 0)	// Not a GPIO_CLOCK pin
-	return ;
+        return ;
 
       usingGpioMemCheck ("pinMode CLOCK") ;
 
@@ -1539,7 +1539,7 @@ int digitalRead (int pin)
     /**/ if (wiringPiMode == WPI_MODE_GPIO_SYS)	// Sys mode
     {
       if (sysFds [pin] == -1)
-	return LOW ;
+        return LOW ;
 
       lseek  (sysFds [pin], 0L, SEEK_SET) ;
       read   (sysFds [pin], &c, 1) ;
@@ -1603,10 +1603,10 @@ void digitalWrite (int pin, int value)
     {
       if (sysFds [pin] != -1)
       {
-	if (value == LOW)
-	  write (sysFds [pin], "0\n", 2) ;
-	else
-	  write (sysFds [pin], "1\n", 2) ;
+        if (value == LOW)
+          write (sysFds [pin], "0\n", 2) ;
+        else
+          write (sysFds [pin], "1\n", 2) ;
       }
       return ;
     }
@@ -1761,7 +1761,7 @@ void pwmToneWrite (int pin, int freq)
  *********************************************************************************
  */
 
-void digitalWriteByte (const int value)
+void digitalWriteData (const int dataSize, const int value)
 {
   uint32_t pinSet = 0 ;
   uint32_t pinClr = 0 ;
@@ -1770,7 +1770,7 @@ void digitalWriteByte (const int value)
 
   /**/ if (wiringPiMode == WPI_MODE_GPIO_SYS)
   {
-    for (pin = 0 ; pin < 8 ; ++pin)
+    for (pin = 0 ; pin < dataSize ; ++pin)
     {
       digitalWrite (pinToGpio [pin], value & mask) ;
       mask <<= 1 ;
@@ -1779,12 +1779,12 @@ void digitalWriteByte (const int value)
   }
   else
   {
-    for (pin = 0 ; pin < 8 ; ++pin)
+    for (pin = 0 ; pin < dataSize ; ++pin)
     {
       if ((value & mask) == 0)
-	pinClr |= (1 << pinToGpio [pin]) ;
+        pinClr |= (1 << pinToGpio [pin]) ;
       else
-	pinSet |= (1 << pinToGpio [pin]) ;
+        pinSet |= (1 << pinToGpio [pin]) ;
 
       mask <<= 1 ;
     }
@@ -1792,6 +1792,11 @@ void digitalWriteByte (const int value)
     *(gpio + gpioToGPCLR [0]) = pinClr ;
     *(gpio + gpioToGPSET [0]) = pinSet ;
   }
+}
+
+void digitalWriteByte (const int value)
+{
+	digitalWriteData (8, value) ;
 }
 
 unsigned int digitalReadByte (void)
@@ -2250,12 +2255,12 @@ int wiringPiSetup (void)
 
   /**/ if (piGpioLayout () == 1)	// A, B, Rev 1, 1.1
   {
-     pinToGpio =  pinToGpioR1 ;
+    pinToGpio =  pinToGpioR1 ;
     physToGpio = physToGpioR1 ;
   }
   else 					// A2, B2, A+, B+, CM, Pi2, Pi3, Zero
   {
-     pinToGpio =  pinToGpioR2 ;
+    pinToGpio =  pinToGpioR2 ;
     physToGpio = physToGpioR2 ;
   }
 
@@ -2289,9 +2294,9 @@ int wiringPiSetup (void)
     }
     else
       return wiringPiFailure (WPI_ALMOST, "wiringPiSetup: Unable to open /dev/mem or /dev/gpiomem: %s.\n"
-	"  Aborting your program because if it can not access the GPIO\n"
-	"  hardware then it most certianly won't work\n"
-	"  Try running with sudo?\n", strerror (errno)) ;
+                              "  Aborting your program because if it can not access the GPIO\n"
+                              "  hardware then it most certainly won't work\n"
+                              "  Try running with sudo?\n", strerror (errno)) ;
   }
 
 // Set the offsets into the memory interface.

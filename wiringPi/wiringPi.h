@@ -233,6 +233,7 @@ extern          void pwmSetClock         (int divisor) ;
 extern          void gpioClockSet        (int pin, int freq) ;
 extern unsigned int  digitalReadByte     (void) ;
 extern unsigned int  digitalReadByte2    (void) ;
+extern          void digitalWriteData    (int dataSize, int value) ;
 extern          void digitalWriteByte    (int value) ;
 extern          void digitalWriteByte2   (int value) ;
 

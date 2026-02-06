@@ -1,0 +1,9 @@
+WiringPi : branch EBE from tags/final_official_2.50
+
+v1.0 - 20260206 :
+	Enhancements:
+		1. Add digitalWriteData() (wiringPi/wiringPi.*)
+		2. Replace -1 by 0xff in uint8_t gpioToClkCon[] & gpioToClkDiv[] (wiringPi/wiringPi.c)
+		3. Modify serialOpen() to block on read until provided timeout and use even parity (wiringPi/wiringSerial.*)
+		4. Add serialGets() #ifdef _EPserialOnTarget_ (used in EPserialForTestOnly/Makefile) (wiringPi/wiringSerial.*)
+
