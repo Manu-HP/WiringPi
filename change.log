@@ -7,3 +7,6 @@ v1.0 - 20260206 :
 		3. Modify serialOpen() to block on read until provided timeout and use even parity (wiringPi/wiringSerial.*)
 		4. Add serialGets() #ifdef _EPserialOnTarget_ (used in EPserialForTestOnly/Makefile) (wiringPi/wiringSerial.*)
 
+v2.0 - 20260206 :
+	Enhancements:
+		1. Remove SOFT_PWM_OUTPUT & SOFT_TONE_OUTPUT modes to no more link softPwm.c & softTone.c from wiringPi (wiringPi/wiringPi.*)
