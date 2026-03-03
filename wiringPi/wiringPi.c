@@ -2195,6 +2195,11 @@ void wiringPiVersion (int *major, int *minor)
   *minor = VERSION_MINOR ;
 }
 
+char * wiringPiVersionStr (void)
+{
+  return VERSION ;
+}
+
 
 /*
  * wiringPiSetup:

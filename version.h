@@ -1,3 +1,3 @@
-#define VERSION "EBE_v2.0.1"
+#define VERSION "EBE_v2.1"
 #define VERSION_MAJOR 2
-#define VERSION_MINOR 0
+#define VERSION_MINOR 1
