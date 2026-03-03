@@ -10,3 +10,7 @@ v1.0 - 20260206 :
 v2.0 - 20260206 :
 	Enhancements:
 		1. Remove SOFT_PWM_OUTPUT & SOFT_TONE_OUTPUT modes to no more link softPwm.c & softTone.c from wiringPi (wiringPi/wiringPi.*)
+
+v2.0.1 - 20260303 :
+	Enhancements:
+		1. Update VERSION (version.h)
