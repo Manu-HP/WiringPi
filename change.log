@@ -19,3 +19,9 @@ v2.1 - 20260303 :
 	Enhancements:
 		1. Update VERSION (version.h)
 		2. Add wiringPiVersionStr() (wiringPi.*)
+
+v2.2 - 20260915 :
+	Enhancements:
+		1. Update VERSION (version.h)
+		2. Add uart_parity_t (wiringSerial.h)
+		3. Add parity parameter to serialOpen() (wiringSerial.*)

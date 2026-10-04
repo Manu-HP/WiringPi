@@ -42,7 +42,7 @@
  *********************************************************************************
  */
 
-int serialOpen (const char *device, const int baud, const int readTimeoutInDecisec)
+int serialOpen (const char *device, const int baud, const uart_parity_t parity, const int readTimeoutInDecisec)
 {
   struct termios options ;
   speed_t myBaud ;
@@ -97,8 +97,14 @@ int serialOpen (const char *device, const int baud, const int readTimeoutInDecis
   cfsetospeed (&options, myBaud) ;
 //  options.c_iflag |= (IGNBRK | IGNCR);		//Ignore BREAK & CR on input - suppressed since binary com, no more ascii
   options.c_cflag |= (CLOCAL | CREAD) ;			//CLOCAL: Ignore modem control lines - CREAD: Enable receiver.
-//  options.c_cflag &= ~PARENB ;				// Disable Parity
-  options.c_cflag |= PARENB ;					// Enable Parity - even by default
+  if (parity == UART_PARITY_EVEN) {
+    options.c_cflag |= PARENB ;					// Enable Parity
+    options.c_cflag &= ~PARODD ;				// Even Parity
+  } else if (parity == UART_PARITY_ODD) {
+    options.c_cflag |= PARENB ;					// Enable Parity
+    options.c_cflag |= PARODD ;					// Odd Parity
+  } else
+    options.c_cflag &= ~PARENB ;				// Disable Parity
   options.c_cflag &= ~CSTOPB ;					// Disable 2nd Stop bit
   options.c_cflag &= ~CSIZE ;
   options.c_cflag |= CS8 ;						// 8-bits data

@@ -19,12 +19,18 @@
  *    along with wiringPi.  If not, see <http://www.gnu.org/licenses/>.
  ***********************************************************************
  */
+#ifndef	__WIRING_SERIAL_H__
+#define	__WIRING_SERIAL_H__
+
+
+typedef enum { UART_PARITY_NONE, UART_PARITY_EVEN, UART_PARITY_ODD } uart_parity_t;
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-extern int   serialOpen      (const char *device, const int baud, const int readTimeoutInDecisec) ;
+extern int   serialOpen      (const char *device, const int baud, const uart_parity_t parity, const int readTimeoutInDecisec) ;
 extern void  serialClose     (const int fd) ;
 extern void  serialFlush     (const int fd) ;
 extern void  serialPutchar   (const int fd, const unsigned char c) ;
@@ -38,4 +44,5 @@ extern int   serialGets      (const int fd, char * const s) ;
 
 #ifdef __cplusplus
 }
+#endif
 #endif
