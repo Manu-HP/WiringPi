@@ -37,9 +37,9 @@ extern void  serialPutchar   (const int fd, const unsigned char c) ;
 extern void  serialPuts      (const int fd, const char *s) ;
 extern void  serialPrintf    (const int fd, const char *message, ...) ;
 extern int   serialDataAvail (const int fd) ;
-extern int   serialGetchar   (const int fd) ;
+extern int   serialGetchar   (const int fd, char *c) ;
 #ifdef _EPserialOnTarget_	//Used in EPserialForTestOnly/Makefile
-extern int   serialGets      (const int fd, char * const s) ;
+extern int   serialGets      (const int fd, char * const s, size_t maxLen) ;
 #endif
 
 #ifdef __cplusplus

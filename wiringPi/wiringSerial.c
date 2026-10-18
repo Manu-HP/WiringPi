@@ -219,14 +219,12 @@ int serialDataAvail (const int fd)
  *********************************************************************************
  */
 
-int serialGetchar (const int fd)
+int serialGetchar (const int fd, char *c)
 {
-  uint8_t x ;
-
-  if (read (fd, &x, 1) != 1)
-    return -1 ;
-
-  return ((int)x) & 0xFF ;
+  if (read(fd, c, 1) != 1)
+    return -1;
+  else
+    return 0;
 }
 
 
@@ -238,13 +236,16 @@ int serialGetchar (const int fd)
  *	time-out defined in serialOpen().
  *********************************************************************************
  */
-int serialGets (const int fd, char * const s)
+int serialGets (const int fd, char * const s, size_t maxLen)
 {
   int     totalNb = 0, readNb;
   char *  buf = s;
 
   while ((readNb = serialDataAvail(fd)) > 0) {
-    if (read(fd, buf, readNb) != readNb)
+    if ((totalNb + readNb) <= (int)maxLen) {
+      if (read(fd, buf, readNb) != readNb)
+        return -1;
+    } else
       return -1;
     /*
     *(buf + readNb) = '\0';

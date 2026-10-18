@@ -27,7 +27,13 @@ v2.2 - 20260915 :
 		3. Add parity parameter to serialOpen() (wiringPi/wiringSerial.*)
 
 v2.3 - 20261013 :
-	Bugs:
+	Enhancements:
 		1. Update VERSION (version.h)
-		2. Correct a param order call to calloc() in wiringPiNewNode() (wiringPi/wiringPi.c)
+	Bugs:
+		1. Correct a param order in calloc() call in wiringPiNewNode() (wiringPi/wiringPi.c)
 
+v3.0 - 20261018 :
+	Enhancements:
+		1. Update VERSION (version.h)
+	Bugs:
+		1. Correct serialGetchar() to differenciate an error from a received binary 0 (wiringPi/wiringSerial.*)
